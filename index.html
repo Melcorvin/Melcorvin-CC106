@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Expense Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0d0d0d;
+            color: #e4e4e4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            width: 40%;
+            margin: auto;
+            background: #141414;
+            padding: 60px;
+            border-radius: 8% 30% / 10% 10%;
+            animation: glow 3s infinite alternate, fadeIn 3s ease-in-out;
+        }
+        .form-container {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 30px 80px rgba(0, 255, 255, 0.3);
+            animation: fadeIn 3s ease-in-out;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 5px;
+            width: 90%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #222;
+            color: #0ff;
+            border: 1px solid #0ff;
+        }
+        button {
+            border-color: #00ffff;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 30px 80px rgba(0, 255, 255, 0.3);
+            animation: glow 3s infinite alternate;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #500101, #002a57);
+            transform: scale(1.08);
+            box-shadow: 0 30px 80px rgba(0, 255, 255, 0.3);
+        }
+        .transaction-list {
+            margin-top: 20px;
+            text-align: left;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #111;
+            box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.7);
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #0ff;
+            color: #fff;
+        }
+        th {
+            background: #222;
+            color: #0ff;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0px 0px 5px rgba(0, 255, 255, 0.5); }
+            50% { box-shadow: 0px 0px 20px rgba(0, 255, 255, 1); }
+            100% { box-shadow: 0px 0px 5px rgba(0, 255, 255, 0.5); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Monthly Expense Calculator</h1>
+        <p>Income: <span id="income">0</span></p>
+        <p>Expense: <span id="expense">0</span></p>
+        <p>Total Balance: <span id="balance">0</span></p>
+        
+        <div class="form-container">
+            <h3>Add Transaction</h3>
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="category" placeholder="Category">
+            <input type="number" id="amount" placeholder="Amount">
+            <select id="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+            <button onclick="addTransaction()">Submit</button>
+        </div>
+
+        <div class="transaction-list">
+            <h3>Transaction List</h3>
+            <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="transaction-table">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    <script>
+        let totalIncome = 0;
+        let totalExpense = 0;
+
+        function addTransaction() {
+            const name = document.getElementById("name").value;
+            const category = document.getElementById("category").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+            const type = document.getElementById("type").value;
+            
+            if (name === "" || category === "" || isNaN(amount)) {
+                alert("Please fill all fields correctly.");
+                return;
+            }
+            
+            const table = document.getElementById("transaction-table");
+            const row = table.insertRow();
+            row.innerHTML = `<td>${name}</td><td>${category}</td><td>${type}</td><td>${amount}</td>`;
+            row.style.animation = "fadeIn 1s ease-in-out";
+            
+            if (type === "income") {
+                totalIncome += amount;
+            } else {
+                totalExpense += amount;
+            }
+            
+            updateBalance();
+        }
+
+        function updateBalance() {
+            document.getElementById("income").innerText = `+ P${totalIncome.toFixed(2)}`;
+            document.getElementById("expense").innerText = `- P${totalExpense.toFixed(2)}`;
+            document.getElementById("balance").innerText = `P${(totalIncome - totalExpense).toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
