@@ -118,7 +118,6 @@ th {
     
     <div class="container">
         <h1>Monthly Expense Calculator</h1>
-        <p>Initial Budget: <input type="number" id="amount" placeholder="Amount">
         <p>Income: <span id="income">0</span></p>
         <p>Expense: <span id="expense">0</span></p>
         <p>Total Balance: <span id="balance">0</span></p>
@@ -182,6 +181,15 @@ th {
         updateBalance();
       }
 
+      function addInitialBudgetToList() {
+        const table = document.getElementById("transaction-table");
+        const row = table.insertRow();
+        row.innerHTML = `<td>Initial Budget</td><td>-</td><td>Income</td><td>${initialBudget.toFixed(
+          2
+        )}</td>`;
+        row.style.animation = "fadeIn 1s ease-in-out";
+        totalIncome = initialBudget;
+      }
       
 
         function addTransaction() {
