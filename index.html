@@ -115,11 +115,25 @@ th {
     </style>
 </head>
 <body>
+    
     <div class="container">
         <h1>Monthly Expense Calculator</h1>
+        <p>Initial Budget: <input type="number" id="amount" placeholder="Amount">
         <p>Income: <span id="income">0</span></p>
         <p>Expense: <span id="expense">0</span></p>
         <p>Total Balance: <span id="balance">0</span></p>
+
+        <div class="container">
+            <h1>Monthly Expense Calculator</h1>
+            <p>
+              Intitial Budget:
+              <input type="number" id="initial-amount" placeholder="Amount" />
+            </p>
+            <button onclick="setInitialBudget()">Set Initial Budget</button>
+      
+            <p>Income: <span id="income">0</span></p>
+            <p>Expense: <span id="expense">0</span></p>
+            <p>Total Balance: <span id="balance">0</span></p>
         
         <div class="wrap">
             <h3>Add Transaction</h3>
@@ -154,6 +168,21 @@ th {
     <script>
         let totalIncome = 0;
         let totalExpense = 0;
+        let initialBudget = 0;
+
+        function setInitialBudget() {
+        initialBudget = parseFloat(
+          document.getElementById("initial-amount").value
+        );
+        if (isNaN(initialBudget) || initialBudget <= 0) {
+          alert("Please enter a valid initial budget.");
+          return;
+        }
+        addInitialBudgetToList();
+        updateBalance();
+      }
+
+      
 
         function addTransaction() {
             const name = document.getElementById("name").value;
