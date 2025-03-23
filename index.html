@@ -9,16 +9,14 @@
 
       body {
         font-family: "Orbitron", sans-serif;
-        background: #000
-          url("https://www.transparenttextures.com/patterns/dark-matter.png");
+        background: #000 url("https://www.transparenttextures.com/patterns/dark-matter.png");
         animation: floatingParticles 15s linear infinite;
         color: #00ffcc;
         text-align: center;
         padding: 20px;
       }
 
-      h1,
-      h3 {
+      h1, h3 {
         font-family: "Share Tech Mono", monospace;
         text-transform: uppercase;
         text-shadow: 0px 0px 15px #00ffcc;
@@ -31,21 +29,10 @@
         background: rgba(5, 5, 5, 0.9);
         padding: 60px;
         border-radius: 12px;
-        backdrop-filter: blur(20px);
         box-shadow: 0px 0px 50px rgba(0, 255, 204, 0.8);
-        animation: pulseGlow 3s infinite alternate ease-in-out;
       }
 
-      .form-container {
-        background: rgba(15, 15, 15, 0.8);
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0px 10px 50px rgba(0, 255, 255, 0.6);
-      }
-
-      input,
-      select,
-      button {
+      input, select, button {
         padding: 14px;
         margin: 8px;
         width: 92%;
@@ -55,108 +42,46 @@
         background: #111;
         color: #00ffff;
         border: 2px solid #00ffff;
-        box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
       }
 
       button {
-        border-color: #00ffff;
-        color: white;
         cursor: pointer;
-        transition: 0.3s;
         background: linear-gradient(90deg, #002a57, #00ffff);
         box-shadow: 0px 15px 50px rgba(0, 255, 255, 0.6);
-        animation: holographic 6s infinite linear;
+        transition: 0.3s;
       }
 
       button:hover {
-        background: linear-gradient(90deg, #00ffff, #002a57);
         transform: scale(1.1);
-        animation: glitch 0.2s infinite;
       }
 
       table {
         width: 100%;
+        margin-top: 20px;
         border-collapse: collapse;
-        background: rgba(5, 5, 5, 0.9);
-        box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
       }
 
-      th {
-        background: rgba(15, 15, 15, 0.9);
-        color: #00ffff;
-      }
-
-      @keyframes pulseGlow {
-        0% {
-          box-shadow: 0px 0px 10px rgba(0, 195, 255, 0.5);
-        }
-        100% {
-          box-shadow: 0px 0px 50px rgba(0, 255, 204, 1);
-        }
+      th, td {
+        padding: 10px;
+        border-bottom: 1px solid #00ffff;
       }
 
       @keyframes flicker {
-        0% {
-          opacity: 0.8;
-          text-shadow: 0px 0px 10px #00ffcc;
-        }
-        50% {
-          opacity: 1;
-          text-shadow: 0px 0px 20px #00ffcc;
-        }
-        100% {
-          opacity: 0.7;
-          text-shadow: 0px 0px 10px #00ffcc;
-        }
-      }
-
-      @keyframes holographic {
-        0% {
-          background: linear-gradient(90deg, #006eff, #ff0015, #ff9900);
-        }
-        50% {
-          background: linear-gradient(90deg, #ff9900, #006eff, #ff0015);
-        }
-        100% {
-          background: linear-gradient(90deg, #ff0015, #ff9900, #006eff);
-        }
-      }
-
-      @keyframes glitch {
-        0% {
-          transform: translateX(0);
-        }
-        25% {
-          transform: translateX(2px);
-        }
-        50% {
-          transform: translateX(-2px);
-        }
-        75% {
-          transform: translateX(2px);
-        }
-        100% {
-          transform: translateX(0);
-        }
+        0% { opacity: 0.8; }
+        50% { opacity: 1; }
+        100% { opacity: 0.7; }
       }
 
       @keyframes floatingParticles {
-        0% {
-          background-position: 0 0;
-        }
-        100% {
-          background-position: 0 150px;
-        }
+        0% { background-position: 0 0; }
+        100% { background-position: 0 150px; }
       }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>Monthly Expense Calculator</h1>
-      <p>
-        Intitial Budget:
-        <input type="number" id="initial-amount" placeholder="Amount" />
-      </p>
+      <p>Initial Budget: <input type="number" id="initial-amount" placeholder="Amount" /></p>
       <button onclick="setInitialBudget()">Set Initial Budget</button>
 
       <p>Initial Budget: <span id="budget">0</span></p>
@@ -164,32 +89,28 @@
       <p>Expense: <span id="expense">0</span></p>
       <p>Total Balance: <span id="balance">0</span></p>
 
-      <div class="wrap">
-        <h3>Add Transaction</h3>
-        <input type="text" id="name" placeholder="Name" />
-        <input type="text" id="category" placeholder="Category" />
-        <input type="number" id="amount" placeholder="Amount" />
-        <select id="type">
-          <option value="income">Income</option>
-          <option value="expense">Expense</option>
-        </select>
-        <button onclick="addTransaction()">Submit</button>
-      </div>
+      <h3>Add Transaction</h3>
+      <input type="text" id="name" placeholder="Name" />
+      <input type="text" id="category" placeholder="Category" />
+      <input type="number" id="amount" placeholder="Amount" />
+      <select id="type">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+      <button onclick="addTransaction()">Submit</button>
 
-      <div class="transaction-list">
-        <h3>Transaction List</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Type</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody id="transaction-table"></tbody>
-        </table>
-      </div>
+      <h3>Transaction List</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="transaction-table"></tbody>
+      </table>
     </div>
 
     <script>
@@ -198,51 +119,32 @@
       let initialBudget = 0;
 
       function setInitialBudget() {
-        initialBudget = parseFloat(
-          document.getElementById("initial-amount").value
-        );
-        if (isNaN(initialBudget) || initialBudget <= 0) {
+        const inputAmount = parseFloat(document.getElementById("initial-amount").value);
+        if (isNaN(inputAmount) || inputAmount <= 0) {
           alert("Please enter a valid initial budget.");
           return;
         }
-        addInitialBudgetToList();
+        initialBudget = inputAmount;
+        totalIncome += initialBudget;
         updateBalance();
-      }
-
-      function addInitialBudgetToList() {
-        const table = document.getElementById("transaction-table");
-        const row = table.insertRow();
-        row.innerHTML = `<td>Initial Budget</td><td>-</td><td>Income</td><td>${initialBudget.toFixed(
-          2
-        )}</td>`;
-        row.style.animation = "fadeIn 1s ease-in-out";
-        totalIncome = initialBudget;
+        addTransactionRow("Initial Budget", "Bank", "Salary", initialBudget);
       }
 
       function addTransaction() {
-        const budget = document.getElementById("budget").value;
         const name = document.getElementById("name").value;
         const category = document.getElementById("category").value;
         const amount = parseFloat(document.getElementById("amount").value);
         const type = document.getElementById("type").value;
 
-        if (name === "" || category === "" || isNaN(amount)) {
-          alert("Please fill all fields correctly.");
+        if (!name || !category || isNaN(amount) || amount <= 0) {
+          alert("Please fill in all fields with valid data.");
           return;
         }
 
-        if (
-          type === "expense" &&
-          totalIncome - totalExpense - initialBudget < amount
-        ) {
-          alert("Insufficient balance! You cannot add this expense.");
+        if (type === "expense" && amount > (totalIncome - totalExpense)) {
+          alert("Insufficient balance for this expense.");
           return;
         }
-
-        const table = document.getElementById("transaction-table");
-        const row = table.insertRow();
-        row.innerHTML = `<td>${type}</td><td>${name}</td><td>${category}</td><td>${type}</td><td>${amount}</td>`;
-        row.style.animation = "fadeIn 1s ease-in-out";
 
         if (type === "income") {
           totalIncome += amount;
@@ -250,22 +152,21 @@
           totalExpense += amount;
         }
 
+        addTransactionRow(name, category, type, amount);
         updateBalance();
       }
 
+      function addTransactionRow(name, category, type, amount) {
+        const table = document.getElementById("transaction-table");
+        const row = table.insertRow();
+        row.innerHTML = `<td>${name}</td><td>${category}</td><td>${type}</td><td>P${amount.toFixed(2)}</td>`;
+      }
+
       function updateBalance() {
-        document.getElementById(
-          "budget"
-        ).innerText = `+ P${initialBudget.toFixed(2)}`;
-        document.getElementById("income").innerText = `+ P${totalIncome.toFixed(
-          2
-        )}`;
-        document.getElementById(
-          "expense"
-        ).innerText = `- P${totalExpense.toFixed(2)}`;
-        document.getElementById("balance").innerText = `P${(
-          totalIncome - totalExpense
-        ).toFixed(2)}`;
+        document.getElementById("budget").innerText = `P${initialBudget.toFixed(2)}`;
+        document.getElementById("income").innerText = `P${totalIncome.toFixed(2)}`;
+        document.getElementById("expense").innerText = `P${totalExpense.toFixed(2)}`;
+        document.getElementById("balance").innerText = `P${(totalIncome - totalExpense).toFixed(2)}`;
       }
     </script>
   </body>
